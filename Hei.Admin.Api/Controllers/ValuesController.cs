@@ -3,10 +3,11 @@ using Hei.Admin.Repository.Basic;
 using Hei.Admin.Service.Basic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Hei.Admin.Api.Controllers
 {
-    [Route("api/[controller]"), Authorize]
+    [Route("api/[controller]")]
     public class ValuesController : BaseApiController
     {
         public SysUserService _sysUserService;
@@ -29,12 +30,14 @@ namespace Hei.Admin.Api.Controllers
             _SysMenuRoleService.Find(1);
 
             return Success(new string[] { "value1", "value2" });
+
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), AllowAnonymous]
         public ViewModel.ApiActionResult Get(int id)
         {
+            throw new Exception("你是失败了");
             return Success("value", "成功");
         }
 

@@ -19,7 +19,6 @@ namespace Hei.Admin.Api.SwaggerExtensions
             }
             if (context.ApiDescription.TryGetMethodInfo(out MethodInfo methodInfo))
             {
-                //var aa = context.ApiDescription.ControllerAttributes();
 
                 var authorized = methodInfo.GetCustomAttribute<AllowAnonymousAttribute>();
                 if (authorized == null)//提供action都没有权限特性标记，检查控制器有没有

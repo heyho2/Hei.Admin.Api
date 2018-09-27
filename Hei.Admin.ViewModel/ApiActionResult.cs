@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Hei.Admin.ViewModel
 {

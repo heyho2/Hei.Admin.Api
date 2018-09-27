@@ -4,13 +4,16 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 
-namespace Hei.Admin.Api
+namespace Hei.Admin.Api.Configures
 {
+    /// <summary>
+    /// 权限配置
+    /// </summary>
     public static class AuthConfigurer
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
-                if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
+            if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
             {
                 services.AddAuthentication(options =>
                 {
@@ -40,6 +43,7 @@ namespace Hei.Admin.Api
                         // If you want to allow a certain amount of clock drift, set that here
                         ClockSkew = TimeSpan.Zero
                     };
+                    options.IncludeErrorDetails = true;
                 });
             }
         }

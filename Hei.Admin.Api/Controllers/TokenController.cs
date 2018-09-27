@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Hei.Admin.ViewModel;
+using Hei.Admin.ViewModel.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,15 +25,14 @@ namespace Hei.Admin.Api.Controllers
         /// <summary>
         /// 登录（签发token）
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="pwd"></param>
         /// <returns></returns>
         [AllowAnonymous, HttpPost]
-        public JsonResult Login(string name, string pwd)
+        public ApiActionResult<LoginResponse> Login([FromBody]LoginRequest request)
         {
             var claims = new[]
                {
                    new Claim(ClaimTypes.Role, "test"),
+                   new Claim(ClaimTypes.Sid, "test"),
                    new Claim(ClaimTypes.MobilePhone, "157****7350"),
                    new Claim("userId","value")
                };
@@ -43,10 +44,10 @@ namespace Hei.Admin.Api.Controllers
                    issuer: Configuration["Authentication:JwtBearer:Issuer"],
                    audience: Configuration["Authentication:JwtBearer:Audience"],
                    claims: claims,
-                    expires: now.AddMinutes(expires),
+                   expires: now.AddMinutes(expires),
                    notBefore: now,
                    signingCredentials: creds);
-            return Json(new
+            return Success(new LoginResponse
             {
                 Authorization = $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}"
             });
