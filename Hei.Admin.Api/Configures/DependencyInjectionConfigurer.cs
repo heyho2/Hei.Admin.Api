@@ -1,9 +1,11 @@
 ﻿using Hei.Admin.Core;
-using Hei.Admin.Repository;
+using Hei.Admin.Core.Redis;
+using Hei.Admin.Repository.Mysql;
 using Hei.Admin.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Reflection;
 
@@ -14,11 +16,18 @@ namespace Hei.Admin.Api.Configures
     /// </summary>
     public class DependencyInjectionConfigurer
     {
+        private static ILoggerFactory Mlogger => new LoggerFactory()
+            .AddDebug((categoryName, logLevel) => (logLevel == LogLevel.Information) && (categoryName == DbLoggerCategory.Database.Command.Name))
+            .AddConsole((categoryName, logLevel) => (logLevel == LogLevel.Information) && (categoryName == DbLoggerCategory.Database.Command.Name));
+
         public static void Configure(IServiceCollection services, IConfiguration Configuration)
         {
-            var connection = Configuration.GetConnectionString("SqlServer");
-            services.AddDbContext<HuachDbContext>(options => options.UseSqlServer(connection));
-            services.AddTransient<DbContext, HuachDbContext>();
+            //var connection = Configuration.GetConnectionString("SqlServer");
+            //services.AddDbContext<HuachDbContext>(options => options.UseSqlServer(connection).UseLoggerFactory(Mlogger));
+            //services.AddTransient<DbContext, HuachDbContext>();
+            var connection = Configuration.GetConnectionString("Mysql");
+            services.AddDbContext<HuachMysqlDbContext>(options => options.UseMySql(connection).UseLoggerFactory(Mlogger));
+            services.AddTransient<DbContext, HuachMysqlDbContext>();
             //1.批量注册Service
             {
                 Assembly assembly = Assembly.LoadFrom($"{ System.AppDomain.CurrentDomain.BaseDirectory}{typeof(BaseService<>).Assembly.GetName().Name}.dll");
@@ -40,6 +49,9 @@ namespace Hei.Admin.Api.Configures
                     }
                 }
             }
+            services.AddTransient<RedisSetService>();
+            services.AddTransient<RedisStringService>();
+
         }
     }
 }

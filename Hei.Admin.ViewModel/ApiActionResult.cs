@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net;
-using System.Threading.Tasks;
-
-namespace Hei.Admin.ViewModel
+﻿namespace Hei.Admin.ViewModel
 {
     /// <summary>
     /// api响应基类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ApiActionResult<T>
+    public class ApiActionResult<T> : Core.Models.ApiActionResult
     {
         /// <summary>
         /// 消息
@@ -27,10 +22,6 @@ namespace Hei.Admin.ViewModel
         /// 是否成功
         /// </summary>
         public virtual bool IsSucceed { get; set; } = true;
-        /// <summary>
-        /// 响应码
-        /// </summary>
-        public virtual HttpStatusCode HttpStatusCode { get; set; } = HttpStatusCode.OK;
     }
     /// <summary>
     /// api响应基类

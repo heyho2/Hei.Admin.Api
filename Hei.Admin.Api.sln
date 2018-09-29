@@ -9,15 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.UnitTest", "Hei.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.Core", "Hei.Admin.Core\Hei.Admin.Core.csproj", "{9C75058C-31AD-41ED-91DE-EFFBEFB4DF99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Admin.ViewModel", "Hei.Admin.ViewModel\Hei.Admin.ViewModel.csproj", "{4779D1D6-F768-4FD4-873A-FB74026BDDF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.ViewModel", "Hei.Admin.ViewModel\Hei.Admin.ViewModel.csproj", "{4779D1D6-F768-4FD4-873A-FB74026BDDF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Admin.Repository", "Hei.Admin.Repository\Hei.Admin.Repository.csproj", "{92445095-CDF4-482C-AA0E-F9C8C84299BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.Repository", "Hei.Admin.Repository\Hei.Admin.Repository.csproj", "{92445095-CDF4-482C-AA0E-F9C8C84299BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Admin.IRepository", "Hei.Admin.IRepository\Hei.Admin.IRepository.csproj", "{019EF9A9-D44C-4A55-9605-79D25574704D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.IRepository", "Hei.Admin.IRepository\Hei.Admin.IRepository.csproj", "{019EF9A9-D44C-4A55-9605-79D25574704D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Admin.Models", "Hei.Admin.Models\Hei.Admin.Models.csproj", "{1D02E220-BA46-4435-8646-74F644C2AC71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.Models", "Hei.Admin.Models\Hei.Admin.Models.csproj", "{1D02E220-BA46-4435-8646-74F644C2AC71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Admin.Service", "Hei.Admin.Service\Hei.Admin.Service.csproj", "{063E1FD4-2E49-43DA-A9C1-9CC23C3718A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Admin.Service", "Hei.Admin.Service\Hei.Admin.Service.csproj", "{063E1FD4-2E49-43DA-A9C1-9CC23C3718A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Admin.Repository.Mysql", "Hei.Admin.Repository.Mysql\Hei.Admin.Repository.Mysql.csproj", "{2CA41C34-F23D-46E1-A54E-5EEBD125934A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{063E1FD4-2E49-43DA-A9C1-9CC23C3718A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{063E1FD4-2E49-43DA-A9C1-9CC23C3718A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{063E1FD4-2E49-43DA-A9C1-9CC23C3718A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA41C34-F23D-46E1-A54E-5EEBD125934A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA41C34-F23D-46E1-A54E-5EEBD125934A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA41C34-F23D-46E1-A54E-5EEBD125934A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA41C34-F23D-46E1-A54E-5EEBD125934A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

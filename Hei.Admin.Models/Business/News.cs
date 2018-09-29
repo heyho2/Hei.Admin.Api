@@ -22,7 +22,7 @@ namespace Hei.Admin.Models.Basic
         /// <summary>
         /// 内容
         /// </summary>
-        [Column(TypeName = "ntext")]
+        [Column(TypeName = "text")]
         public string Content { get; set; }
         /// <summary>
         /// 图片

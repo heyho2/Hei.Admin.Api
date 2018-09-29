@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hei.Admin.Repository.Migrations
 {
     [DbContext(typeof(HuachDbContext))]
-    [Migration("20180923121658_HeiMigration")]
-    partial class HeiMigration
+    [Migration("20180928104802_HeiMigration5")]
+    partial class HeiMigration5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -439,7 +439,7 @@ namespace Hei.Admin.Repository.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<int>("Type");
+                    b.Property<short>("Type");
 
                     b.Property<string>("UserImg")
                         .IsRequired()

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Hei.Admin.Core.EntityFrameworkExtend
 {
-   public static class QueryableExtend
+    public static class QueryableExtend
     {
         /// <summary>
         /// 根据字段名排序

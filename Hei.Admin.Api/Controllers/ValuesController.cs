@@ -1,9 +1,8 @@
-﻿using Hei.Admin.IRepository.Basic;
-using Hei.Admin.Repository.Basic;
-using Hei.Admin.Service.Basic;
+﻿using Hei.Admin.Service.Basic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace Hei.Admin.Api.Controllers
 {
@@ -22,15 +21,13 @@ namespace Hei.Admin.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ViewModel.ApiActionResult<string[]> Get()
+        public async Task<ViewModel.ApiActionResult<string[]>> Get()
         {
-            var aa = _sysUserService.FirstOrDefault(a => a.Id == 3);
-
+            //var aa = _sysUserService.FirstOrDefaultAsync(a => a.Id == 3);
             var aaa = _sysUserService.GetUser();
-            _SysMenuRoleService.Find(1);
+            await _SysMenuRoleService.FindAsync(1);
 
             return Success(new string[] { "value1", "value2" });
-
         }
 
         // GET api/values/5

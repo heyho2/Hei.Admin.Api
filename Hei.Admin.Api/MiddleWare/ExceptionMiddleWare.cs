@@ -1,4 +1,5 @@
 ﻿using Hei.Admin.Api.MiddleWare;
+using Hei.Admin.Core.Utils;
 using Hei.Admin.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Logging;
@@ -46,14 +47,13 @@ namespace Hei.Admin.Api.MiddleWare
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             response.ContentType = "application/json";
-            await response.WriteAsync(
-                JsonConvert.SerializeObject(new ApiActionResult
-                {
-                    Message = "服务器异常",
-                    Code = 1,
-                    IsSucceed = false,
-                    HttpStatusCode = HttpStatusCode.InternalServerError
-                })).ConfigureAwait(false);
+            await response.WriteAsync(JsonHelper.Serialize(new ApiActionResult
+            {
+                Message = "服务器异常",
+                Code = 1,
+                IsSucceed = false,
+                HttpStatusCode = HttpStatusCode.InternalServerError
+            })).ConfigureAwait(false);
 
         }
 

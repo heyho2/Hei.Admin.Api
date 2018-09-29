@@ -25,13 +25,13 @@ namespace Hei.Admin.Api.Filters
             {
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
-            context.Result = new JsonResult(new ApiActionResult
+            context.Result = new ApiActionResult
             {
                 Message = "服务器异常",
                 Code = 1,
                 IsSucceed = false,
                 HttpStatusCode = HttpStatusCode.InternalServerError
-            });
+            };
         }
         public void Log(Exception exception)
         {

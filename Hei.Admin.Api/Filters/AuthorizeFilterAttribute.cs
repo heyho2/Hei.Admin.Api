@@ -8,13 +8,20 @@ using Microsoft.Extensions.Primitives;
 using System.Linq;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using Hei.Admin.Service.Basic;
+using Hei.Admin.Core.Redis;
+using Hei.Admin.Service;
 
 namespace Hei.Admin.Api.Filters
 {
     public class AuthorizeFilterAttribute : ActionFilterAttribute
     {
         private const string TokenKeyName = "Authorization";
-
+        public RedisStringService _redisString;
+        public AuthorizeFilterAttribute(RedisStringService redisString)
+        {
+            _redisString = redisString;
+        }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var methodInfo = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo;
@@ -37,20 +44,19 @@ namespace Hei.Admin.Api.Filters
         protected void HandleUnauthenticatedRequest(ActionExecutingContext context)
         {
             var response = context.HttpContext.Response;
-            context.Result = new JsonResult(new ApiActionResult
+            context.Result = new ApiActionResult
             {
                 Message = "会话过期，请重新登录！",
                 Code = 1,
                 IsSucceed = false,
                 HttpStatusCode = HttpStatusCode.Unauthorized
-            });
+            };
         }
         protected bool IsAuthenticated(string token, HttpContext context)
         {
             if (!string.IsNullOrWhiteSpace(token))
             {
-                //var user = RedisHelper.ClusterInstance.Get<UserInfo>(string.Format(Constant.AdminUserKey, token));
-                UserInfo user = null;
+                var user = _redisString.Get<UserInfo>(string.Format(RedisKey.LoginTokenKey, token));
                 if (user == null)
                 {
                     return false;

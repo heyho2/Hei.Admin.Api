@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hei.Admin.Core.Encrypt;
+using Hei.Admin.Core.Redis;
+using Hei.Admin.Core.Utils;
+using Hei.Admin.Service;
+using Hei.Admin.Service.Basic;
 using Hei.Admin.ViewModel;
 using Hei.Admin.ViewModel.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Hei.Admin.Api.Controllers
 {
@@ -18,9 +21,13 @@ namespace Hei.Admin.Api.Controllers
     public class TokenController : BaseApiController
     {
         public IConfiguration Configuration { get; }
-        public TokenController(IConfiguration configuration)
+        public RedisStringService _redisString;
+        public SysUserService _sysUserService;
+        public TokenController(IConfiguration configuration, RedisStringService redisString, SysUserService sysUserService)
         {
             Configuration = configuration;
+            _redisString = redisString;
+            _sysUserService = sysUserService;
         }
         /// <summary>
         /// 登录（签发token）
@@ -51,6 +58,38 @@ namespace Hei.Admin.Api.Controllers
             {
                 Authorization = $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}"
             });
+        }
+        [AllowAnonymous, HttpPost,Produces(typeof(ApiActionResult<LoginResponse>))]
+        public async Task<IActionResult> Login2([FromBody]LoginRequest request)
+        {
+            var user = await _sysUserService.FirstOrDefaultAsync(a => new
+            {
+                a.UserName,
+                a.Id,
+                a.RealName,
+                a.Mobile,
+                a.Password
+            }, a => a.UserName == request.Name);
+            if (user == null)
+            {
+                return Fail("找不到用户名");
+            }
+            var token = GetToken(user.Id, user.UserName);
+            _redisString.Set(string.Format(RedisKey.LoginTokenKey, token), new UserInfo
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Mobile = user.Mobile,
+                RealName = user.RealName,
+            });
+            return Success(new LoginResponse()
+            {
+                Authorization = token
+            });
+        }
+        string GetToken(int userId, string userName)
+        {
+            return MD5Encrypt.Encrypt($"{userId}{userName}{Util.Time()}");
         }
     }
 }

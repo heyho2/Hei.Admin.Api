@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Hei.Admin.Repository.Migrations
+namespace Hei.Admin.Repository.Mysql.Migrations
 {
-    public partial class HeiMigration : Migration
+    public partial class HeiMysqlMigration5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -36,7 +36,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -57,14 +57,14 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
                     ModifyBy = table.Column<int>(nullable: false),
                     Disable = table.Column<short>(nullable: false),
                     Type = table.Column<short>(nullable: false),
-                    Content = table.Column<string>(type: "ntext", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
                     Controller = table.Column<string>(maxLength: 50, nullable: false),
                     Action = table.Column<string>(maxLength: 50, nullable: false),
                     Url = table.Column<string>(maxLength: 500, nullable: false)
@@ -79,7 +79,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -101,7 +101,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -120,7 +120,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -141,7 +141,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -160,7 +160,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -171,7 +171,7 @@ namespace Hei.Admin.Repository.Migrations
                     Mobile = table.Column<string>(maxLength: 11, nullable: false),
                     RealName = table.Column<string>(maxLength: 20, nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Type = table.Column<int>(nullable: false),
+                    Type = table.Column<short>(nullable: false),
                     UserImg = table.Column<string>(maxLength: 500, nullable: false),
                     IDCard = table.Column<string>(maxLength: 18, nullable: true),
                     Addr = table.Column<string>(maxLength: 500, nullable: true),
@@ -188,7 +188,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -207,7 +207,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -227,7 +227,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -254,7 +254,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -263,7 +263,7 @@ namespace Hei.Admin.Repository.Migrations
                     Title = table.Column<string>(maxLength: 30, nullable: false),
                     Type = table.Column<int>(nullable: false),
                     IsPublish = table.Column<bool>(nullable: false),
-                    Content = table.Column<string>(type: "ntext", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
                     ImgUrl = table.Column<string>(maxLength: 200, nullable: true),
                     IsExternal = table.Column<bool>(nullable: false),
                     ExternalUrl = table.Column<string>(maxLength: 200, nullable: true),
@@ -279,7 +279,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -293,7 +293,7 @@ namespace Hei.Admin.Repository.Migrations
                     Code = table.Column<long>(nullable: false),
                     Qty = table.Column<int>(nullable: false),
                     ReadCount = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(type: "ntext", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
                     ProductTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -306,7 +306,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),
@@ -326,7 +326,7 @@ namespace Hei.Admin.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true),

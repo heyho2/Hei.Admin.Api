@@ -23,7 +23,6 @@ namespace Hei.Admin.Api
                 option.Filters.Add(typeof(AuthorizeFilterAttribute));
                 option.Filters.Add(typeof(ValidateModelFilterAttribute));
                 option.Filters.Add(typeof(CustomExceptionFilterAttribute));
-
             }).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());//JSON首字母小写解决
 
             DependencyInjectionConfigurer.Configure(services, Configuration);
@@ -36,7 +35,7 @@ namespace Hei.Admin.Api
         }
 
         // 运行时调用此方法。 使用此方法配置HTTP请求管道。
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, HuachDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //dbContext.Database.Migrate();
 

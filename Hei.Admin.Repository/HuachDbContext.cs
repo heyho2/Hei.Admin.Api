@@ -1,15 +1,17 @@
-﻿using Hei.Admin.Models.Basic;
+﻿using Hei.Admin.Models;
+using Hei.Admin.Models.Basic;
 using Hei.Admin.Models.Business;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Hei.Admin.Repository
 {
     public class HuachDbContext : DbContext
     {
-        //private Logger logger = Logger.CreateLogger(typeof(HuachDbContext));
         public HuachDbContext(DbContextOptions<HuachDbContext> options) : base(options)
         {
-           
+            Database.Migrate();
         }
         static HuachDbContext()
         {
@@ -30,5 +32,12 @@ namespace Hei.Admin.Repository
         public virtual DbSet<ProductAttr> ProductAttrSet { get; set; }
         public virtual DbSet<ProductType> ProductTypeSet { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SysUser>()
+                .HasQueryFilter(p => p.Disable == (short)BaseModel.DisableEnum.Normal);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

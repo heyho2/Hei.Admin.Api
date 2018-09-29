@@ -1,3 +1,4 @@
+using System;
 using Hei.Admin.Core;
 using Hei.Admin.IRepository.Basic;
 using Hei.Admin.Models.Basic;
@@ -20,7 +21,6 @@ namespace Hei.Admin.Service.Basic
         public SysUser GetUser()
         {
             return _sysUserRepository.DbContext.Set<SysUser>().Find(1);
-
         }
     }
 }

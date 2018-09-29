@@ -21,6 +21,5 @@ namespace Hei.Admin.Models.Basic
         /// </summary>
         [Required]
         public int MenuId { get; set; }
-        public int MenuId2222 { get; set; }
     } 
 }

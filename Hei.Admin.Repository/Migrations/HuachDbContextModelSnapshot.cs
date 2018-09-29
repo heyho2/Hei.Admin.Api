@@ -437,7 +437,7 @@ namespace Hei.Admin.Repository.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<int>("Type");
+                    b.Property<short>("Type");
 
                     b.Property<string>("UserImg")
                         .IsRequired()

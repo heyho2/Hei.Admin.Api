@@ -35,7 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Hei.Admin.Core\Hei.Admin.Core.csproj" />
     <ProjectReference Include="..\Hei.Admin.IRepository\Hei.Admin.IRepository.csproj" />
-    <ProjectReference Include="..\Hei.Admin.Repository\Hei.Admin.Repository.csproj" />
+    <ProjectReference Include="..\Hei.Admin.Repository.Mysql\Hei.Admin.Repository.Mysql.csproj" />
     <ProjectReference Include="..\Hei.Admin.Service\Hei.Admin.Service.csproj" />
     <ProjectReference Include="..\Hei.Admin.ViewModel\Hei.Admin.ViewModel.csproj" />
   </ItemGroup>

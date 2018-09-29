@@ -10,19 +10,19 @@ namespace Hei.Admin.Models.Basic
         /// 用户名称
         /// </summary>
         [StringLength(20), Required]
-        
+
         public string UserName { get; set; }
         /// <summary>
         /// 密码
         /// </summary>
         [StringLength(18), Required]
-        
+
         public string Password { get; set; }
         /// <summary>
         /// 手机
         /// </summary>
         [StringLength(11), Required]
-        
+
         public string Mobile { get; set; }
         /// <summary>
         /// 真实姓名
@@ -33,23 +33,23 @@ namespace Hei.Admin.Models.Basic
         /// Email
         /// </summary>
         [StringLength(50), Required]
-        
+
         public string Email { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
-        public int Type { get; set; }
+        public short Type { get; set; }
         /// <summary>
         /// 头像
         /// </summary>
         [StringLength(500), Required]
-        
+
         public string UserImg { get; set; }
         /// <summary>
         /// 身份证
         /// </summary>
         [StringLength(18)]
-        
+
         public string IDCard { get; set; }
         /// <summary>
         /// 地址
@@ -66,5 +66,19 @@ namespace Hei.Admin.Models.Basic
         /// 父节点
         /// </summary>
         public int ParentId { get; set; }
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// 普通
+            /// </summary>
+            General = 1,
+            /// <summary>
+            /// 管理员
+            /// </summary>
+            Admin = 2
+        }
     }
 }

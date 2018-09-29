@@ -6,12 +6,13 @@ using Hei.Admin.ViewModel.User;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Hei.Admin.Service
 {
     public class BaseService<T> : IService, IDisposable where T : BaseModel
     {
-        private readonly IBaseRepository<T> _repository = null;
+        private readonly IBaseRepository<T> _repository;
         public BaseService(IBaseRepository<T> repository)
         {
             _repository = repository;
@@ -21,22 +22,13 @@ namespace Hei.Admin.Service
         /// </summary>
         UserInfo CurrentUser => new UserInfo();
         /// <summary>
-        /// 实现对数据库的查询  --简单查询
-        /// </summary>
-        /// <param name="whereLambda"></param>
-        /// <returns></returns>
-        public IQueryable<T> Where(Expression<Func<T, bool>> whereLambda)
-        {
-            return _repository.Where(whereLambda);
-        }
-        /// <summary>
         /// 实现对数据库的查询  --简单单行查询
         /// </summary> 
         /// <param name="whereLambda"></param>
         /// <returns></returns>
-        public T FirstOrDefault(Expression<Func<T, bool>> whereLambda)
+        public async Task<TResult> FirstOrDefaultAsync<TResult>(Expression<Func<T, TResult>> selector, Expression<Func<T, bool>> whereLambda)
         {
-            return _repository.FirstOrDefault(whereLambda);
+            return await _repository.FirstOrDefaultAsync(selector, whereLambda);
         }
         /// <summary>
         /// 实现对数据的分页查询
@@ -48,15 +40,14 @@ namespace Hei.Admin.Service
         /// <param name="order">DESC/ASC</param>
         /// <param name="sort">排序字段</param>
         /// <returns></returns>
-        public TResult GetListPaging<TSelect, TResult>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TSelect>> selector, BasePagingRequest request) where TSelect : BaseItemResponse where TResult : BasePagingResponse<TSelect>, new()
+        public async Task<TResult> GetListPaging<TSelect, TResult>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TSelect>> selector, BasePagingRequest request) where TSelect : BaseItemResponse where TResult : BasePagingResponse<TSelect>, new()
         {
-            var result = _repository.GetListPaging(whereLambda, selector, out int total, request.PageIndex, request.PageSize, request.Direction, request.SortField);
-            var resultItems = result.ToList();
+            var result = await _repository.GetListPagingAsync(whereLambda, selector, request.PageIndex, request.PageSize, request.Direction, request.SortField);
             return new TResult
             {
-                Count = total,
-                Total = total % request.PageSize == 0 ? total / request.PageSize : total / request.PageSize + 1,
-                Items = resultItems
+                Count = result.Count,
+                Total = result.Total,
+                Items = result.Items
             };
         }
         /// <summary>
@@ -64,31 +55,31 @@ namespace Hei.Admin.Service
         /// </summary>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public T Find(params object[] keyValues)
+        public async Task<T> FindAsync(params object[] keyValues)
         {
-            return _repository.Find(keyValues);
+            return await _repository.FindAsync(keyValues);
         }
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="delLambda"></param>
         /// <returns></returns>
-        public int Delete(Expression<Func<T, bool>> delLambda)
+        public async Task<int> DeleteAsync(Expression<Func<T, bool>> delLambda)
         {
-            return _repository.Delete(delLambda);
+            return await _repository.DeleteAsync(delLambda);
         }
         /// <summary>
         /// 新增
         /// </summary>
         /// <param name="delLambda"></param>
         /// <returns></returns>
-        public int Add(T entity)
+        public async Task<int> AddAsync(T entity)
         {
             entity.CreateBy = CurrentUser.Id;
             entity.CreateDate = DateTime.Now;
             entity.ModifyBy = 0;
             entity.Disable = (short)BaseModel.DisableEnum.Normal;
-            return _repository.Add(entity);
+            return await _repository.AddAsync(entity);
         }
         /// <summary>
         /// 修改
@@ -96,12 +87,12 @@ namespace Hei.Admin.Service
         /// </summary>
         /// <param name="delLambda"></param>
         /// <returns></returns>
-        public int Update(T entity)
+        public async Task<int> Update(T entity)
         {
             entity.ModifyBy = CurrentUser.Id;
             entity.ModifyDate = DateTime.Now;
             entity.Disable = (short)BaseModel.DisableEnum.Normal;
-            return _repository.Update(entity);
+            return await _repository.UpdateAsync(entity);
         }
         /// <summary>
         /// 禁用
@@ -109,13 +100,13 @@ namespace Hei.Admin.Service
         /// </summary>
         /// <param name="delLambda"></param>
         /// <returns></returns>
-        public int Disable(int id)
+        public async Task<int> DisableAsync(int id)
         {
             var entity = _repository.Find(id);
             entity.ModifyBy = CurrentUser.Id;
             entity.ModifyDate = DateTime.Now;
             entity.Disable = (short)BaseModel.DisableEnum.Disable;
-            return _repository.Update(entity);
+            return await _repository.UpdateAsync(entity);
         }
         /// <summary>
         /// ioc 容器自动释放资源

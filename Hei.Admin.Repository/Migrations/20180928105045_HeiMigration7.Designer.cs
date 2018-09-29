@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hei.Admin.Repository.Migrations
 {
     [DbContext(typeof(HuachDbContext))]
-    [Migration("20180924161832_HeiMigration3")]
-    partial class HeiMigration3
+    [Migration("20180928105045_HeiMigration7")]
+    partial class HeiMigration7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -331,10 +331,6 @@ namespace Hei.Admin.Repository.Migrations
 
                     b.Property<int>("RoleId");
 
-                    b.Property<int>("disssss");
-
-                    b.Property<int>("disssss2");
-
                     b.HasKey("Id");
 
                     b.ToTable("sys_menu_role");
@@ -443,7 +439,7 @@ namespace Hei.Admin.Repository.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<int>("Type");
+                    b.Property<short>("Type");
 
                     b.Property<string>("UserImg")
                         .IsRequired()
