@@ -55,5 +55,17 @@ namespace Huach.Framework.Extend
             }
             return result;
         }
+        public static string GetDescription<T>(int value) where T : struct
+        {
+            var result = Enum.ToObject(typeof(T), value);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return ((Enum)result).GetDescription();
+            }
+        }
     }
 }

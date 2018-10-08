@@ -215,6 +215,6 @@ namespace Hei.Admin.Repository
         {
             return await DbContext.Set<T>().Where(whereLambda).Select(selector).FirstOrDefaultAsync();
         }
+        #endregion
     }
-    #endregion
 }
