@@ -110,7 +110,7 @@ namespace Hei.Admin.Service
         }
         /// <summary>
         /// ioc 容器自动释放资源
-        /// 那这个继承IDispose 也没必要写了
+        /// 这个继承IDispose 也没必要写了
         /// 因为注册DbContext， ioc 也会自动调用 DbContext的Dispose
         /// </summary>
         public void Dispose()

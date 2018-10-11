@@ -1,4 +1,5 @@
 ﻿using Hei.Admin.ViewModel;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Logging;
@@ -12,6 +13,7 @@ namespace Hei.Admin.Api.Filters
 {
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {
+        private readonly ILog log = LogManager.GetLogger(typeof(CustomExceptionFilterAttribute));
         public override void OnException(ExceptionContext context)
         {
             Log(context.Exception);
@@ -27,7 +29,7 @@ namespace Hei.Admin.Api.Filters
             }
             context.Result = new ApiActionResult
             {
-                Message = "服务器异常",
+                Message = context.Exception.ToString(),
                 Code = 1,
                 IsSucceed = false,
                 HttpStatusCode = HttpStatusCode.InternalServerError
@@ -35,8 +37,9 @@ namespace Hei.Admin.Api.Filters
         }
         public void Log(Exception exception)
         {
+            log.Error(exception);
             //记录日志
-            LogHelper.LogInformation(exception.Message.ToString());
+            //LogHelper.LogInformation(exception.Message.ToString());
         }
     }
 }

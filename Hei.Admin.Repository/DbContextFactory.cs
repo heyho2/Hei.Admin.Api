@@ -1,4 +1,0 @@
-﻿namespace Hei.Admin.Repository
-{
-
-}

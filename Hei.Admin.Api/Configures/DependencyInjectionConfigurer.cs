@@ -26,6 +26,10 @@ namespace Hei.Admin.Api.Configures
             //services.AddDbContext<HuachDbContext>(options => options.UseSqlServer(connection).UseLoggerFactory(Mlogger));
             //services.AddTransient<DbContext, HuachDbContext>();
             var connection = Configuration.GetConnectionString("Mysql");
+            if (connection == null)
+            {
+                throw new System.Exception("无法读取配置文件");
+            }
             services.AddDbContext<HuachMysqlDbContext>(options => options.UseMySql(connection).UseLoggerFactory(Mlogger));
             services.AddTransient<DbContext, HuachMysqlDbContext>();
             //1.批量注册Service

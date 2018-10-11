@@ -2,8 +2,6 @@
 using Hei.Admin.Models.Basic;
 using Hei.Admin.Models.Business;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace Hei.Admin.Repository
 {
